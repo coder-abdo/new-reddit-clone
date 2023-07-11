@@ -1,0 +1,70 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum VoteType {
+  UP
+  DOWN
+}
+
+model User {
+  id           String        @id @default(cuid())
+  name         String
+  email        String        @unique
+  image        String?
+  username     String?       @unique
+  posts        Post[]
+  votes        Vote[]
+  comments     Comment[]
+  commentVotes CommentVote[]
+}
+
+model Post {
+  id        String    @id @default(cuid())
+  title     String
+  content   String
+  User      User      @relation(fields: [userId], references: [id])
+  userId    String
+  votes     Vote[]
+  comments  Comment[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Vote {
+  type     VoteType
+  author   User     @relation(fields: [authorId], references: [id])
+  authorId String
+  post     Post     @relation(fields: [postId], references: [id])
+  postId   String
+
+  @@id([authorId, postId])
+}
+
+model CommentVote {
+  type      VoteType
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String
+  comment   Comment  @relation(fields: [commentId], references: [id])
+  commentId String
+
+  @@id([authorId, commentId])
+}
+
+model Comment {
+  id           String        @id @default(cuid())
+  content      String
+  author       User          @relation(fields: [authorId], references: [id])
+  authorId     String
+  Post         Post?         @relation(fields: [postId], references: [id])
+  postId       String?
+  commentVotes CommentVote[]
+}
