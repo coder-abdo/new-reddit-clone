@@ -1,9 +1,11 @@
+"use client";
 import { PiScanBold } from "react-icons/pi";
 import { Button } from "./ui/button";
 import { UserDropDownMenu } from "./userDropDownMenu";
-import Link from "next/link";
+import { useModalStore } from "@/store/modalsStore";
 
 export const UserMenu = () => {
+  const { openModal } = useModalStore();
   return (
     <div className="flex items-center ml-2 gap-4">
       <Button
@@ -14,11 +16,11 @@ export const UserMenu = () => {
         Get APP
       </Button>
       <Button
-        asChild
         size="lg"
         className="bg-mainColor text-zinc-50 capitalize rounded-full h-8 hover:bg-mainColor"
+        onClick={() => openModal()}
       >
-        <Link href={"/sign-in"}>log in</Link>
+        Log In
       </Button>
       <UserDropDownMenu />
     </div>
