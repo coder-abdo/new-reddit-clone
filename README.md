@@ -6,9 +6,10 @@ this is a reddit clone built on top of next js, typescript, prisma, and tailwind
 
 ### Techs:
 
-- NextJS
-- Prisma
-- TailwindCSS
+- Auth: `Next-Auth`.
+- App Logic: `NextJS`.
+- DB: `Prisma` and `Supabase`.
+- Styling: `TailwindCSS` with `daisy-ui`.
 
 ### How to run the project:
 
