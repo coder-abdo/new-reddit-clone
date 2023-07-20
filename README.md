@@ -27,5 +27,5 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - [x] authentication
 - [x] Favicon
 - [x] Navbar without login
-- [] Navbar with login
+- [x] Navbar with login
 - [] Responsive Navbar
