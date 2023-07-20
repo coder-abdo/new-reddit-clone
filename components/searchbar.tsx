@@ -1,7 +1,7 @@
 import { BsSearch } from "react-icons/bs";
 export const Searchbar = () => {
   return (
-    <div className="relative flex-grow">
+    <div className="relative flex-grow flex-shrink">
       <input
         type="search"
         placeholder="Search Reddit"

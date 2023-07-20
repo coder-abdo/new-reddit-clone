@@ -39,9 +39,6 @@ export const authOptions: AuthOptions = {
   session: {
     strategy: "jwt",
   },
-  pages: {
-    signIn: "/sign-in",
-  },
   callbacks: {
     async session({ token, session }) {
       if (token) {
@@ -53,7 +50,7 @@ export const authOptions: AuthOptions = {
       return session;
     },
     async jwt({ user, token }) {
-      const dbUser = await db.user.findFirst({
+      const dbUser = await db.user.findUnique({
         where: {
           email: token.email!,
         },

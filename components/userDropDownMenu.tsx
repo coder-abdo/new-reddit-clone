@@ -7,11 +7,13 @@ import { RiFileList3Line } from "react-icons/ri";
 import { CiBullhorn } from "react-icons/ci";
 import { TbLogout } from "react-icons/tb";
 import Link from "next/link";
+import { useModalStore } from "@/store/modalsStore";
 type State = {
   isTermsOpen: boolean;
   isMoreOpen: boolean;
 };
 export const UserDropDownMenu = () => {
+  const { openModal } = useModalStore();
   const [menu, toggleMenu] = useReducer(
     (prev: State, next: Partial<State>): State => {
       return { ...prev, ...next };
@@ -113,13 +115,13 @@ export const UserDropDownMenu = () => {
           </h4>
         </li>
         <li>
-          <Link
-            href={"/sign-in"}
+          <button
+            onClick={() => openModal()}
             className="bg-transparent text-[14px] text-zinc-800 rounded-none font-semibold hover:bg-blueColor hover:text-zinc-100"
           >
             <TbLogout className="text-lg" />
             <span>Log In / Sign Up</span>
-          </Link>
+          </button>
         </li>
       </ul>
     </details>
